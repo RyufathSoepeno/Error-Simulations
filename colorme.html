@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Color Challenge</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#button-container {
+    margin: 20px;
+}
+
+.color-button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Make the screen yellow</h1>
+    <div id="button-container">
+        <button class="color-button" id="red-button" onclick="buttonPressed('red')">Red</button>
+        <button class="color-button" id="orange-button" onclick="buttonPressed('orange')">Orange</button>
+        <button class="color-button" id="yellow-button" onclick="buttonPressed('yellow')">Yellow</button>
+        <button class="color-button" id="green-button" onclick="buttonPressed('green')">Green</button>
+        <button class="color-button" id="blue-button" onclick="buttonPressed('blue')">Blue</button>
+        <button class="color-button" id="purple-button" onclick="buttonPressed('purple')">Purple</button>
+    </div>
+    <div id="message"></div>
+
+    <script>
+        function buttonPressed(color) {
+    // Disable all buttons
+    const buttons = document.querySelectorAll(".color-button");
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+
+    // Add a 3-second delay before re-enabling buttons
+    setTimeout(() => {
+        buttons.forEach(button => {
+            button.disabled = false;
+        });
+    }, 3000);
+
+    // Simulate incorrect behavior for the yellow button
+    if (color === "yellow") {
+        document.body.style.backgroundColor = "red"; // Incorrect color
+        document.getElementById("message").innerText = "Try again!";
+    } else if (color === "blue") {
+        document.body.style.backgroundColor = "yellow"; // Correct color for the task
+        document.getElementById("message").innerHTML = `
+            There you go!<br><br>
+            <button onclick="nextPage()">Next Page</button>
+        `;
+    } else {
+        document.body.style.backgroundColor = color; // Other colors
+        document.getElementById("message").innerText = "Try again!";
+    }
+}
+
+function nextPage() {
+    window.location.href = "Window3.html";
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order of Operations</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        text-align: center;
+        margin-top: 50px;
+    }
+    #expression {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    #feedback {
+        font-size: 20px;
+        margin-top: 20px;
+        height: 30px; /* Ensure a consistent height to avoid layout shifts */
+    }
+    .correct {
+        color: green;
+    }
+    .wrong {
+        color: red;
+    }
+    .skip-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        display: none; /* Hidden by default */
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Order of Operations</h1>
+    <p>Enter the correct answer:</p>
+    <div id="expression"></div>
+    <input type="text" id="answer" placeholder="Your answer">
+    <button onclick="checkAnswer()">Submit</button>
+    <div id="feedback"></div> <!-- Text for correct/wrong answer -->
+    <button class="skip-button" id="skipBtn" onclick="skipGame()">Skip</button>
+</div>
+
+<script>
+    let type; // Type of expression: 1 or 2
+    let correctCount = 0;
+    let wrongCount = 0;
+
+    // Generate a random integer between min and max
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Generate a random expression of specified type
+    function generateExpression() {
+        const operations = ['+', '-', '*', '/'];
+        const numOperations = getRandomInt(3, 5); // Number of operations in the expression
+        let expression = '';
+
+        for (let i = 0; i < numOperations; i++) {
+            let op = operations[getRandomInt(0, 3)]; // Randomly select an operation
+            let num = getRandomInt(1, 10); // Random number between 1 and 10
+            expression += num + op;
+        }
+
+        let lastNum = getRandomInt(1, 10); // Add the last number
+        expression += lastNum;
+
+        return expression;
+    }
+
+    // Check if the answer is correct
+    function checkAnswer() {
+        const expression = document.getElementById('expression').textContent;
+        const answer = parseInt(document.getElementById('answer').value);
+        const feedback = document.getElementById('feedback'); // Get feedback element
+
+        // Evaluate the expression based on type
+        let result;
+        if (type === 1) {
+            result = eval(expression);
+        } else {
+            // Parse the expression to prioritize multiplication and division
+            const parsedExpression = expression.replace(/(\d+)([*\/])(\d+)/g, (_, a, op, b) => {
+                return op === '*' ? a * b : a / b;
+            });
+            result = eval(parsedExpression);
+        }
+
+        if (answer === result) {
+            correctCount++;
+            wrongCount = 0; // Reset wrong count on a correct answer
+            feedback.textContent = "Correct!";
+            feedback.className = "correct"; // Add green color
+            if (correctCount === 3) {
+                window.location.href = "Window3.html";
+            } else {
+                setTimeout(generateNewExpression, 1000); // Wait 1 second before generating new expression
+            }
+        } else {
+            wrongCount++;
+            feedback.textContent = "Wrong! Try again.";
+            feedback.className = "wrong"; // Add red color
+            if (wrongCount >= 3) {
+                document.getElementById('skipBtn').style.display = 'block'; // Show skip button after 3 wrong attempts
+            }
+            setTimeout(generateNewExpression, 1000); // Wait 1 second before generating new expression
+        }
+
+        document.getElementById('answer').value = ''; // Clear the input field
+    }
+
+    // Generate a new expression
+    function generateNewExpression() {
+        type = getRandomInt(1, 2);
+        const expression = generateExpression();
+        document.getElementById('expression').textContent = expression;
+        document.getElementById('feedback').textContent = ''; // Clear feedback message
+    }
+
+    // Skip the game
+    function skipGame() {
+        window.location.href = "Window4.html";
+    }
+
+    // Initialize the game
+    generateNewExpression();
+</script>
+</body>
+</html>

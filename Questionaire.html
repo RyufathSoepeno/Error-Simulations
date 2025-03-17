@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Choice Questions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: green;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .choices {
+      margin-top: 10px;
+    }
+    .choice {
+      margin-bottom: 5px;
+    }
+    #hourglass {
+      position: absolute; /* Position relative to the parent container */
+      top: 0; /* Place at the top of the question */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Center horizontally */
+      display: none;
+      text-align: center;
+      margin-top: 205px;
+      width: 50px; /* Set a fixed width */
+      height: 50px; /* Set a fixed height */
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1></h1>
+  </div>
+  <div class="container">
+  
+    <div class="question" id="question1">
+      <h2>Question 1: Jenny has two plates of nine cookies. Frank has four plates of six cookies. Amanda has one plate of ten cookies. Allan has three plates of five cookies. Who has more cookies?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q1_choice1" name="question1" value="Jenny">
+          <label for="q1_choice1">Jenny</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q1_choice2" name="question1" value="Frank">
+          <label for="q1_choice2">Frank</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q1_choice3" name="question1" value="Amanda">
+          <label for="q1_choice3">Amanda</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q1_choice4" name="question1" value="Allan">
+          <label for="q1_choice4">Allan</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+	
+    <div class="question" id="question2" style="display: none;">
+      <h2>Question 2: What is the capital of Switzerland?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q2_choice1" name="question2" value="Bern">
+          <label for="q2_choice1">Bern</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q2_choice2" name="question2" value="Zurich">
+          <label for="q2_choice2">Zurich</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q2_choice3" name="question2" value="Geneva">
+          <label for="q2_choice3">Geneva</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q2_choice4" name="question2" value="Berlin">
+          <label for="q2_choice4">Berlin</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+	
+    <div class="question" id="question3" style="display: none;">
+      <h2>Question 3: What family of instruments does the piano belong to?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q3_choice1" name="question3" value="Keyboard">
+          <label for="q3_choice1">Keyboard</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q3_choice2" name="question3" value="Percussion">
+          <label for="q3_choice2">Percussion</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q3_choice3" name="question3" value="Strings">
+          <label for="q3_choice3">String</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q3_choice4" name="question3" value="Tippletoe">
+          <label for="q3_choice4">Tippecanoe</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+	
+    <div class="question" id="question4" style="display: none;">
+      <h2>Question 4: How many islands does Indonesia have?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q4_choice1" name="question4" value="16180">
+          <label for="q4_choice1">16180</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q4_choice2" name="question4" value="17221">
+          <label for="q4_choice2">17221</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q4_choice3" name="question4" value="18110">
+          <label for="q4_choice3">18110</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q4_choice4" name="question4" value="9814">
+          <label for="q4_choice4">9814</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+	
+    <div class="question" id="question5" style="display: none;">
+      <h2>Question 5: Who is the actor of Home Alone?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q5_choice1" name="question5" value="Josh">
+          <label for="q5_choice1">Josh Hutcherson</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q5_choice2" name="question5" value="Will">
+          <label for="q5_choice2">Will Wheaton</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q5_choice3" name="question5" value="Jace">
+          <label for="q5_choice3">Jace Norman</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q5_choice4" name="question5" value="Macaulay">
+          <label for="q5_choice4">Macaulay Culkin</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+	
+    <div class="question" id="question6" style="display: none;">
+      <h2>Question 6: What is the plural form of child?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q6_choice1" name="question6" value="Child">
+          <label for="q6_choice1">Child</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q6_choice2" name="question6" value="Children">
+          <label for="q6_choice2">Children</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q6_choice3" name="question6" value="Childrens">
+          <label for="q6_choice3">Childrens</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q6_choice4" name="question6" value="Childs">
+          <label for="q6_choice4">Childs</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+	
+    <div class="question" id="question7" style="display: none;">
+      <h2>Question 7: If a square is five inches tall and its area is 25, what is its perimeter?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q7_choice1" name="question7" value="5">
+          <label for="q7_choice1">5</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q7_choice2" name="question7" value="10">
+          <label for="q7_choice2">10</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q7_choice3" name="question7" value="20">
+          <label for="q7_choice3">20</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q7_choice4" name="question7" value="25">
+          <label for="q7_choice4">25</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+
+    <div class="question" id="question8" style="display: none;">
+      <h2>Question 8: When a metal is cooked, and the metal is made contact with human skin, what is that heat transfer called?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q8_choice1" name="question8" value="Convection">
+          <label for="q8_choice1">Convection</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q8_choice2" name="question8" value="Conduction">
+          <label for="q8_choice2">Conduction</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q8_choice3" name="question8" value="Opaquation">
+          <label for="q8_choice3">Opaquation</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q8_choice4" name="question8" value="Radiation">
+          <label for="q8_choice4">Radiation</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+
+    <div class="question" id="question9" style="display: none;">
+      <h2>Question 9: Which one is not Jupiter's Moon?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q9_choice1" name="question9" value="Callisto">
+          <label for="q9_choice1">Callisto</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q9_choice2" name="question9" value="Ganymede">
+          <label for="q9_choice2">Enceladus</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q9_choice3" name="question9" value="IO">
+          <label for="q9_choice3">IO</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q9_choice4" name="question9" value="Enceladus">
+          <label for="q9_choice4">Ganymede</label>
+        </div>
+      </div>
+      <br>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+
+    <div class="question" id="question10" style="display: none;">
+      <h2>Question 10: Which part of the cell is the powerhouse of a cell?</h2>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="q10_choice1" name="question10" value="Cytoplasm">
+          <label for="q10_choice1">Cytoplasm</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q10_choice2" name="question10" value="Ribosome">
+          <label for="q10_choice2">Ribosome</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q10_choice3" name="question10" value="Golgi">
+          <label for="q10_choice3">Golgi</label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="q10_choice4" name="question10" value="Mitochondria">
+          <label for="q10_choice4">Mitochondria</label>
+        </div>
+      </div>
+      <br>
+      <a href="Window2.html">
+			<button>Finish</button>
+		</a>
+    </div>
+  </div>
+  
+  <div id="hourglass">
+    <img src="hourglass.gif" alt="Hourglass">
+  </div>
+  <script>
+    let currentQuestion = 1; // Initialize the current question counter
+    const totalQuestions = 10; // Total number of questions
+
+    function nextQuestion() {
+      if (currentQuestion < totalQuestions) {
+        document.getElementById('hourglass').style.display = 'block'; // Show the hourglass
+        setTimeout(function() {
+          document.getElementById('hourglass').style.display = 'none'; // Hide the hourglass after the delay
+          document.getElementById(`question${currentQuestion}`).style.display = 'none'; // Hide current question
+          currentQuestion++; // Move to the next question
+          document.getElementById(`question${currentQuestion}`).style.display = 'block'; // Show next question
+        }, getRandomWaitTime());
+      } else {
+        document.getElementById('questionContainer').style.display = 'none'; // Hide the question container
+        document.getElementById('endMessage').style.display = 'block'; // Show the end message
+        redirectToNextPage();
+      }
+    }
+
+    function redirectToNextPage() {
+      // Redirect to the next page after a brief delay
+      window.location.href = 'Window2.html'; // Replace with the actual URL of the next page
+    }
+    
+    function getRandomWaitTime() {
+      // Returns a random number between 3000 and 9000 (milliseconds)
+      return Math.floor(Math.random() * (9000 - 3000 + 1) + 3000);
+    }
+  </script>
+</body>
+</html>

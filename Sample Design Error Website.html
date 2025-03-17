@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzling Design</title>
+    <style>
+        body {
+            font-family: "Papyrus", cursive, sans-serif;
+            background: repeating-linear-gradient(
+                45deg,
+                #f0f,
+                #f0f 10px,
+                #0ff 10px,
+                #0ff 20px
+            );
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff3333;
+            margin-top: 20px;
+            text-shadow: 2px 2px #333;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 5px;
+            color: #ffffff;
+        }
+
+        .tiny-button {
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border: 2px dashed #333;
+            position: absolute;
+            transform-origin: center;
+            cursor: pointer;
+            display: inline-block;
+            animation: blinkColor 1.5s infinite;
+        }
+
+        .tiny-button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes blinkColor {
+            0% {
+                background-color: #ffcc33;
+                color: #111;
+                border-color: #333;
+            }
+            25% {
+                background-color: #33ccff;
+                color: #fff;
+                border-color: #00f;
+            }
+            50% {
+                background-color: #ff33aa;
+                color: #000;
+                border-color: #f00;
+            }
+            75% {
+                background-color: #66ff66;
+                color: #222;
+                border-color: #0f0;
+            }
+            100% {
+                background-color: #ffcc33;
+                color: #111;
+                border-color: #333;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h1 id="cityTitle">Find and Click the Correct City:</h1>
+        <p class="no-white-space" data-city="Jombang">Jombang</p>
+        <p class="no-white-space" data-city="Jakarta">Jakarta</p>
+        <p class="no-white-space" data-city="Semarang">Semarang</p>
+        <p class="no-white-space" data-city="Surabaya">Surabaya</p>
+        <p class="no-white-space" data-city="Bandung">Bandung</p>
+    </div>
+    <script>
+        let attempts = 0;
+        let correctCity;
+        const cityParagraphs = Array.from(document.querySelectorAll('.no-white-space'));
+
+        function getRandomPosition() {
+            return {
+                x: Math.floor(Math.random() * (window.innerWidth - 100)),
+                y: Math.floor(Math.random() * (window.innerHeight - 100)),
+            };
+        }
+
+        function misalignButtons() {
+            const buttons = document.querySelectorAll('.tiny-button');
+            buttons.forEach((button) => {
+                const { x, y } = getRandomPosition();
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+                button.style.transform = `rotate(${Math.floor(Math.random() * 360)}deg)`;
+            });
+        }
+
+        function setNewCorrectCity() {
+            let newCityIndex;
+            do {
+                newCityIndex = Math.floor(Math.random() * cityParagraphs.length);
+            } while (cityParagraphs[newCityIndex].textContent === correctCity);
+
+            correctCity = cityParagraphs[newCityIndex].textContent;
+            document.getElementById('cityTitle').textContent = `Find and Click the Correct City: ${correctCity}`;
+        }
+
+        window.onload = function () {
+            const buttons = [];
+
+            cityParagraphs.forEach((cityParagraph) => {
+                const button = document.createElement('button');
+                button.className = 'tiny-button';
+                button.textContent = cityParagraph.textContent;
+
+                const { x, y } = getRandomPosition();
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+
+                button.dataset.city = cityParagraph.textContent;
+                buttons.push(button);
+
+                button.addEventListener('click', function () {
+                    if (button.dataset.city === correctCity) {
+                        attempts++;
+                        if (attempts >= 3) {
+                            window.location.href = 'Congratulations.html';
+                        } else {
+                            alert('Correct! New city to find.');
+                            setNewCorrectCity();
+                            misalignButtons();
+                        }
+                    } else {
+                        alert('Wrong city! Try again.');
+                    }
+                });
+
+                document.body.appendChild(button);
+            });
+
+            setNewCorrectCity(); // Set the initial correct city
+        };
+    </script>
+</body>
+</html>

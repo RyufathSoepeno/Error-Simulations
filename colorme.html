@@ -65,6 +65,9 @@ h1 {
     if (color === "yellow") {
         document.body.style.backgroundColor = "red"; // Incorrect color
         document.getElementById("message").innerText = "Try again!";
+    } else if (color === "red") {
+        document.body.style.backgroundColor = "blue"; // Incorrect color
+        document.getElementById("message").innerText = "Try again!";
     } else if (color === "blue") {
         document.body.style.backgroundColor = "yellow"; // Correct color for the task
         document.getElementById("message").innerHTML = `
